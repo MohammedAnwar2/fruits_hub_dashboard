@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/functions/validate_input.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_constants.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_form_field.dart';
-import 'package:fruits_hub_dashboard/features/add_products/domain/entities/product_entities.dart';
+import 'package:fruits_hub_dashboard/features/add_products/domain/entities/add_product_input_entity.dart';
+import 'package:fruits_hub_dashboard/features/add_products/presentation/cubit/add_products_cubit.dart';
 import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/image_field.dart';
 import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/is_feature_check_box.dart';
 
@@ -87,7 +89,7 @@ class _AddProductsViewBodyState extends State<AddProductsViewBody> {
                     showErrorMessage();
                   } else {
                     if (formKey.currentState!.validate()) {
-                      ProductEntities productEntities = ProductEntities(
+                      AddProductEntities inputEntity = AddProductEntities(
                         productName: nameController.text,
                         productPrice: priceController.text,
                         productCode: codeController.text,
@@ -95,6 +97,9 @@ class _AddProductsViewBodyState extends State<AddProductsViewBody> {
                         imageFile: imageFile!,
                         isFeature: isFeature,
                       );
+                      context
+                          .read<AddProductsCubit>()
+                          .addProduct(addProductEntities: inputEntity);
                     } else {
                       autovalidateMode = AutovalidateMode.always;
                       setState(() {});

@@ -1,14 +1,14 @@
 import 'dart:io';
 
-class ProductEntities {
+class AddProductEntities {
   final String productName;
   final String productPrice;
   final String productCode;
   final String productDescription;
   final bool isFeature;
   final File imageFile;
-  final String? imageUrl;
-  ProductEntities({
+  String? imageUrl;
+  AddProductEntities({
     required this.productName,
     required this.productPrice,
     required this.productCode,
