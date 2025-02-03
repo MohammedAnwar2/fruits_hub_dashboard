@@ -18,6 +18,18 @@ class _IsfeatureCheckBoxState extends State<IsfeatureCheckBox> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: 'is feature item ?',
+                style: AppTextStyle.semiBold13
+                    .copyWith(color: AppColors.grayLight),
+              ),
+            ],
+          ),
+          // textAlign: TextAlign.right,
+        ),
         CustomCheckbox(
           value: termsValue,
           onChanged: (value) {
@@ -26,22 +38,7 @@ class _IsfeatureCheckBoxState extends State<IsfeatureCheckBox> {
               termsValue = value;
             });
           },
-        ),
-        SizedBox(width: 16),
-        Flexible(
-          child: Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: 'is feature item? ',
-                  style: AppTextStyle.semiBold13
-                      .copyWith(color: AppColors.grayLight),
-                ),
-              ],
-            ),
-            // textAlign: TextAlign.right,
-          ),
-        ),
+        )
       ],
     );
   }

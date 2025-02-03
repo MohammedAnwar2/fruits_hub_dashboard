@@ -64,6 +64,7 @@ class _ImageFieldState extends State<ImageField> {
                 onPressed: () {
                   setState(() {
                     imageFile = null;
+                    widget.onFilePicked(imageFile);
                   });
                 },
                 icon:
