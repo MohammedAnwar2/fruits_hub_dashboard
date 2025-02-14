@@ -3,7 +3,7 @@ import 'package:fruits_hub_dashboard/core/error/failures.dart';
 import 'package:fruits_hub_dashboard/core/repositories/images_repo/image_repo.dart';
 import 'package:fruits_hub_dashboard/core/repositories/products_repo/products_repo.dart';
 import 'package:fruits_hub_dashboard/core/utils/either_class.dart';
-import 'package:fruits_hub_dashboard/features/add_products/domain/entities/add_product_input_entity.dart';
+import 'package:fruits_hub_dashboard/features/add_products/domain/entities/product_entity.dart';
 part 'add_products_state.dart';
 
 class AddProductsCubit extends Cubit<AddProductsState> {
@@ -12,8 +12,7 @@ class AddProductsCubit extends Cubit<AddProductsState> {
   final ImageRepo imageRepo;
   final ProductsRepo productsRepo;
 
-  Future<void> addProduct(
-      {required AddProductEntities addProductEntities}) async {
+  Future<void> addProduct({required ProductEntities addProductEntities}) async {
     emit(AddProductsLoading());
     Either<Failure, String> result =
         await imageRepo.uploadImage(file: addProductEntities.imageFile);

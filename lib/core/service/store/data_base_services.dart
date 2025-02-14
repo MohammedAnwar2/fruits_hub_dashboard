@@ -4,11 +4,19 @@ abstract class DataBaseServices {
     required Map<String, dynamic> data,
     String? docId,
   });
-  Future<Map<String, dynamic>> readData(
-      {required String path, required String documetId});
+  Future<dynamic> readData(
+      {required String path, String? documentId, Map<String, dynamic>? query});
 
   Future<bool> checkDataExists(
-      {required String path, required String documetId});
-  // Future<void> update();
-  // Future<void> delete();
+      {required String path, required String documentId});
+
+  Future<void> update({
+    required String path,
+    required Map<String, dynamic> data,
+    String? docId,
+  });
+  Future<void> delete({
+    required String path,
+    required String docId,
+  });
 }

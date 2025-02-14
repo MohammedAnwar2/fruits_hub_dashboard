@@ -17,11 +17,7 @@ class FirebaseStorageServices extends StorageServices {
       final storageRef = firebaseStorage.ref().child(path);
       await storageRef.putFile(file);
       return await storageRef.getDownloadURL();
-    } on FirebaseException catch (e) {
-      print("Firebase Storage Error: ${e.code} - ${e.message}");
-      throw ServerException('Failed to upload image');
     } catch (e) {
-      print("Unexpected Error: $e");
       throw ServerException('Failed to upload image');
     }
   }

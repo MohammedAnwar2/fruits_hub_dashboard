@@ -2,14 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_hub_dashboard/core/functions/generate_product_code.dart';
 import 'package:fruits_hub_dashboard/core/functions/validate_input.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_constants.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_form_field.dart';
-import 'package:fruits_hub_dashboard/features/add_products/domain/entities/add_product_input_entity.dart';
+import 'package:fruits_hub_dashboard/features/add_products/domain/entities/product_entity.dart';
 import 'package:fruits_hub_dashboard/features/add_products/presentation/cubit/add_products_cubit.dart';
 import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/image_field.dart';
 import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/is_feature_check_box.dart';
+import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/is_organic_check_box.dart';
 
 class AddProductsViewBody extends StatefulWidget {
   const AddProductsViewBody({super.key});
@@ -23,9 +25,13 @@ class _AddProductsViewBodyState extends State<AddProductsViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
-  TextEditingController codeController = TextEditingController();
+  // TextEditingController codeController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController unitAmountController = TextEditingController();
+  TextEditingController expirationMonthsController = TextEditingController();
+  TextEditingController numberOfColoriesController = TextEditingController();
   bool isFeature = false;
+  bool isOrganic = false;
   File? imageFile;
 
   @override
@@ -54,12 +60,36 @@ class _AddProductsViewBodyState extends State<AddProductsViewBody> {
                   validator: (value) {
                     return validateInput(value, 'product price is required');
                   }),
+              // CustomTextFormField(
+              //   controller: codeController,
+              //   text: "Product code",
+              //   keyboardType: TextInputType.text,
+              //   validator: (value) {
+              //     return validateInput(value, 'product code is required');
+              //   },
+              // ),
               CustomTextFormField(
-                controller: codeController,
-                text: "Product code",
+                controller: expirationMonthsController,
+                text: "Expiration Months",
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  return validateInput(value, 'product code is required');
+                  return validateInput(value, 'expiration months is required');
+                },
+              ),
+              CustomTextFormField(
+                controller: unitAmountController,
+                text: "Unit Amount",
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  return validateInput(value, 'unit amount is required');
+                },
+              ),
+              CustomTextFormField(
+                controller: numberOfColoriesController,
+                text: "Number Of Colories",
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  return validateInput(value, 'number of colories is required');
                 },
               ),
               CustomTextFormField(
@@ -70,6 +100,11 @@ class _AddProductsViewBodyState extends State<AddProductsViewBody> {
                 validator: (value) {
                   return validateInput(
                       value, 'product description is required');
+                },
+              ),
+              IsOrganicCheckBox(
+                onChanged: (value) {
+                  isOrganic = value;
                 },
               ),
               IsfeatureCheckBox(
@@ -89,14 +124,19 @@ class _AddProductsViewBodyState extends State<AddProductsViewBody> {
                     showErrorMessage();
                   } else {
                     if (formKey.currentState!.validate()) {
-                      AddProductEntities inputEntity = AddProductEntities(
-                        productName: nameController.text,
-                        productPrice: priceController.text,
-                        productCode: codeController.text,
-                        productDescription: descriptionController.text,
-                        imageFile: imageFile!,
-                        isFeature: isFeature,
-                      );
+                      ProductEntities inputEntity = ProductEntities(
+                          productName: nameController.text,
+                          productPrice: num.parse(priceController.text),
+                          productCode: generateProductCode(),
+                          productDescription: descriptionController.text,
+                          imageFile: imageFile!,
+                          isFeature: isFeature,
+                          expirationMonths:
+                              int.parse(expirationMonthsController.text),
+                          unitAmount: int.parse(unitAmountController.text),
+                          numberOfCalories:
+                              int.parse(numberOfColoriesController.text),
+                          isOrganic: isOrganic);
                       context
                           .read<AddProductsCubit>()
                           .addProduct(addProductEntities: inputEntity);
