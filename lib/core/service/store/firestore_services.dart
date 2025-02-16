@@ -92,8 +92,21 @@ Future<void> update({
 
 
   @override
-  Future<void> delete({required String path, required String docId}) {
-    return firestore.collection(path).doc(docId).delete();
+  Future<void> delete({required String path,  String? docId, Map<String, dynamic>? query})async {
+    if (query != null) {
+      Query<Map<String, dynamic>> allData = firestore.collection(path);
+      allData = filter(query, allData);
+       await allData.get().then((value) {
+        if (value.docs.isEmpty) {
+          throw ServerException('Document not found');
+        }
+        return Future.wait(value.docs.map((element) async {
+          await firestore.collection(path).doc(element.id).delete();
+        },),);
+      });
+    } else {
+      return firestore.collection(path).doc(docId).delete();
+    }
   }
 
   Query<Map<String, dynamic>> filter(Map<String, dynamic> query, Query<Map<String, dynamic>> data) {

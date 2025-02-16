@@ -7,9 +7,9 @@ abstract class OrdersDashboardRepo {
   
   Future<Either<Failure, List<OrderEntity>>> getArchivedOrders();
 
-  Future<Either<Failure, Unit>> nextStatus(OrderEntity  orderModel, int status);
+  Future<Either<Failure, Unit>> nextStatus(OrderEntity  orderEntity, int status);
 
-  Future<Either<Failure, Unit>> previousStatus(OrderEntity  orderModel, int status);
+  Future<Either<Failure, Unit>> previousStatus(OrderEntity  orderEntity, int status);
 
-  Future<Either<Failure, Unit>> deleteOrder(String docId);
+  Future<Either<Failure, Unit>> deleteOrder(String orderId);
 }

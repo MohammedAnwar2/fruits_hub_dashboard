@@ -8,9 +8,13 @@ class OrderListItemsEntities  {
   }
   replaceInList(OrderEntity orderEntity) {
     if(orderEntity.status==4 ){
-      orders.removeWhere((element) => element.orderid == orderEntity.orderid);
+      removeOrder(orderEntity.orderid);
+      // orders.removeWhere((element) => element.orderid == orderEntity.orderid);
     }else {
       orders = orders.map((e) => e.orderid == orderEntity.orderid ? orderEntity : e).toList();
     }
+  }
+  removeOrder(String orderId) {
+    orders.removeWhere((element) => element.orderid == orderId);
   }
 }

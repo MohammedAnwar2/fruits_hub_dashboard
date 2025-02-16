@@ -55,12 +55,15 @@ class OrdersDashboardCubit extends Cubit<OrdersDashboardState> {
     );
   }
 
-  Future<void> deleteOrder(String docId) async {
+  Future<void> cancelOrder(String orderId) async {
     emit(OrdersDashboardLoading());
-    final result = await ordersDashboardRepo.deleteOrder(docId);
+    final result = await ordersDashboardRepo.deleteOrder(orderId);
     result.fold(
       (failure) => emit(OrdersDashboardError(message: failure.errorMessage)),
-      (unit) => emit(OrdersDashboardSuccess(orders: ordersList.orders)),
+      (unit) {
+      ordersList.removeOrder(orderId);
+      emit(OrdersDashboardSuccess(orders: ordersList.orders));
+      } 
     );
   }
 }

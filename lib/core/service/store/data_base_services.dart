@@ -17,6 +17,7 @@ abstract class DataBaseServices {
   });
   Future<void> delete({
     required String path,
-    required String docId,
+     String? docId,
+     Map<String, dynamic>? query
   });
 }

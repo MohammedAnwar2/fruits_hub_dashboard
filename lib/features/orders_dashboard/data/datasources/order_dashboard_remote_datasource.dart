@@ -59,10 +59,18 @@ class OrderDashboardRemoteDatasourceImp
   }
 
    @override
-  Future<void> deleteOrder(String docId) async {
+  Future<void> deleteOrder(String orderId) async {
+    QueryModel queryModel = QueryModel(
+      where: [
+        WhereFilter(
+          field: BackendendEndpoint.orderidOrdersField,
+          isEqualTo: orderId,
+        ),
+      ],
+    );
     await dataBaseServices.delete(
       path: BackendendEndpoint.orderDashboard,
-      docId: docId,
+      query: queryModel.toMap(),
     );
   }
 

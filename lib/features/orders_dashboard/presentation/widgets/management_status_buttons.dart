@@ -35,7 +35,9 @@ class ManagementStatusButtons extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        CustomButton(text: "Cancel Order", onPressed: () {}),
+        CustomButton(text: "Cancel Order", onPressed: () {
+          context.read<OrdersDashboardCubit>().cancelOrder(order.orderid);
+        }),
         const SizedBox(height: 20),
       ],
     );

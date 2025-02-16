@@ -39,9 +39,9 @@ class OrderDashboardRepoImp extends OrdersDashboardRepo {
     }
   }
     @override
-  Future<Either<Failure, Unit>> deleteOrder(String docId) async {
+  Future<Either<Failure, Unit>> deleteOrder(String orderId) async {
     try {
-      await orderDashboardRemoteDatasource.deleteOrder(docId);
+      await orderDashboardRemoteDatasource.deleteOrder(orderId);
       return Either.right(Unit.instance);
     } catch (e) {
       return Either.left(ServerFailure('Failed to delete order!'));
