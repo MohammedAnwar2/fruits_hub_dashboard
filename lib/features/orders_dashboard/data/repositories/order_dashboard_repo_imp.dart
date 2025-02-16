@@ -60,9 +60,10 @@ class OrderDashboardRepoImp extends OrdersDashboardRepo {
   }
 
   @override
-  Future<Either<Failure, Unit>> previousStatus(String docId, int status) async {
+  Future<Either<Failure, Unit>> previousStatus(OrderEntity  orderEntity, int status) async {
+    OrderModel orderModel = OrderModel.fromEntity(orderEntity);
     try {
-      await orderDashboardRemoteDatasource.previousStatus(docId, status);
+      await orderDashboardRemoteDatasource.previousStatus(orderModel, status);
       return Either.right(Unit.instance);
     } catch (e) {
       return Either.left(ServerFailure('Failed to update status!'));

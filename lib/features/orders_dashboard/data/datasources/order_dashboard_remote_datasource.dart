@@ -10,7 +10,7 @@ abstract class OrderDashboardRemoteDatasource {
 
   Future<void> nextStatus(OrderModel  orderModel, int status);
 
-  Future<void> previousStatus(String docId, int status);
+  Future<void> previousStatus(OrderModel  orderModel, int status);
 
   Future<void> deleteOrder(String docId);
 }
@@ -77,7 +77,7 @@ class OrderDashboardRemoteDatasourceImp
       ],
       );
     await dataBaseServices.update(
-      path: BackendendEndpoint.orderDashboard,
+      path: BackendendEndpoint.orderDashboardNextStatus,
       query: queryModel.toMap(),
       data: {
         BackendendEndpoint.statusOrdersField: status,
@@ -86,10 +86,18 @@ class OrderDashboardRemoteDatasourceImp
   }
 
   @override
-  Future<void> previousStatus(String docId, int status) async {
+  Future<void> previousStatus(OrderModel  orderModel, int status) async {
+       QueryModel queryModel = QueryModel(
+      where: [
+        WhereFilter(
+          field: BackendendEndpoint.orderidOrdersField,
+          isEqualTo: orderModel.orderid,
+        ),
+      ],
+      );
     await dataBaseServices.update(
-      path: BackendendEndpoint.orderDashboard,
-      docId: docId,
+      path: BackendendEndpoint.orderDashboardPreviousStatus,
+      query: queryModel.toMap(),
       data: {
         BackendendEndpoint.statusOrdersField: status,
       },

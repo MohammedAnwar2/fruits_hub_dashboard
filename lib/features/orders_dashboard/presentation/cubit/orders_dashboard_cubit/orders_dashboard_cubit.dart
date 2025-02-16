@@ -34,7 +34,7 @@ class OrdersDashboardCubit extends Cubit<OrdersDashboardState> {
       final result = await ordersDashboardRepo.nextStatus(orderModel, status);
       result.fold(
         (failure) => emit(OrdersDashboardError(message: failure.errorMessage)),
-        (unit) {
+        (unit) async{
           orderModel.increamentStatus();
           ordersList.replaceInList(orderModel);
           emit(OrdersDashboardSuccess(orders: ordersList.orders));
@@ -42,12 +42,16 @@ class OrdersDashboardCubit extends Cubit<OrdersDashboardState> {
       );
   }
 
-  Future<void> previousStatus(String docId, int status) async {
+  Future<void> previousStatus(OrderEntity orderModel, int status) async {
     emit(OrdersDashboardLoading());
-    final result = await ordersDashboardRepo.previousStatus(docId, status);
+    final result = await ordersDashboardRepo.previousStatus(orderModel, status);
     result.fold(
       (failure) => emit(OrdersDashboardError(message: failure.errorMessage)),
-      (unit) => emit(OrdersDashboardSuccess(orders: ordersList.orders)),
+      (unit) {
+          orderModel.decreamentStatus();
+          ordersList.replaceInList(orderModel);
+          emit(OrdersDashboardSuccess(orders: ordersList.orders));
+      } 
     );
   }
 

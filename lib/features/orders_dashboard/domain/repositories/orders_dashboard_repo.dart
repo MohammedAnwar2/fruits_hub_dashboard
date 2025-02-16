@@ -9,7 +9,7 @@ abstract class OrdersDashboardRepo {
 
   Future<Either<Failure, Unit>> nextStatus(OrderEntity  orderModel, int status);
 
-  Future<Either<Failure, Unit>> previousStatus(String docId, int status);
+  Future<Either<Failure, Unit>> previousStatus(OrderEntity  orderModel, int status);
 
   Future<Either<Failure, Unit>> deleteOrder(String docId);
 }
