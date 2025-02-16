@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_constants.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
-import 'package:fruits_hub_dashboard/features/add_products/presentation/pages/add_products_view.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/pages/add_products_view.dart';
 import 'package:fruits_hub_dashboard/features/orders/presentation/pages/order_dashboard_view.dart';
 
 class DashboardViewBody extends StatelessWidget {

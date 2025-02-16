@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_colors.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_text_style.dart';
-import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/custom_check_box.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/custom_check_box.dart';
 
 class IsOrganicCheckBox extends StatefulWidget {
   const IsOrganicCheckBox({super.key, required this.onChanged});

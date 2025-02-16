@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/functions/show_evect_event_message.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_colors.dart';
 import 'package:fruits_hub_dashboard/core/utils/custom_model_progress_indecator.dart';
-import 'package:fruits_hub_dashboard/features/add_products/presentation/cubit/add_products_cubit.dart';
-import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/add_products_view_body.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/cubit/add_products_cubit.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/add_products_view_body.dart';
 
 class AddProductsViewBodyConsumer extends StatelessWidget {
   const AddProductsViewBodyConsumer({

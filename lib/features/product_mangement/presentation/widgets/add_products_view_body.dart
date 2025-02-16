@@ -7,11 +7,11 @@ import 'package:fruits_hub_dashboard/core/functions/validate_input.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_constants.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_form_field.dart';
-import 'package:fruits_hub_dashboard/features/add_products/domain/entities/product_entity.dart';
-import 'package:fruits_hub_dashboard/features/add_products/presentation/cubit/add_products_cubit.dart';
-import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/image_field.dart';
-import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/is_feature_check_box.dart';
-import 'package:fruits_hub_dashboard/features/add_products/presentation/widgets/is_organic_check_box.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/domain/entities/product_entity.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/cubit/add_products_cubit.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/image_field.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/is_feature_check_box.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/is_organic_check_box.dart';
 
 class AddProductsViewBody extends StatefulWidget {
   const AddProductsViewBody({super.key});

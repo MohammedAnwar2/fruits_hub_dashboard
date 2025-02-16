@@ -3,8 +3,8 @@ import 'package:fruits_hub_dashboard/core/repositories/products_repo/products_re
 import 'package:fruits_hub_dashboard/core/service/store/data_base_services.dart';
 import 'package:fruits_hub_dashboard/core/utils/backendend_endpoint.dart';
 import 'package:fruits_hub_dashboard/core/utils/either_class.dart';
-import 'package:fruits_hub_dashboard/features/add_products/data/models/product_model.dart';
-import 'package:fruits_hub_dashboard/features/add_products/domain/entities/product_entity.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/data/models/product_model.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/domain/entities/product_entity.dart';
 
 class ProductsRepoImp implements ProductsRepo {
   final DataBaseServices dataBaseServices;

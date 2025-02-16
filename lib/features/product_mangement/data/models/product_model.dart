@@ -1,4 +1,4 @@
-import 'package:fruits_hub_dashboard/features/add_products/domain/entities/product_entity.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/domain/entities/product_entity.dart';
 
 class ProductModel {
   final String productName;
