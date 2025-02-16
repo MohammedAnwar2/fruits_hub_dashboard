@@ -13,7 +13,7 @@ abstract class DataBaseServices {
   Future<void> update({
     required String path,
     required Map<String, dynamic> data,
-    String? docId,
+    String? docId,Map<String, dynamic>? query
   });
   Future<void> delete({
     required String path,

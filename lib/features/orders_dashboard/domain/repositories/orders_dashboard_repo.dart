@@ -4,5 +4,12 @@ import 'package:fruits_hub_dashboard/features/orders_dashboard/domain/entities/o
 
 abstract class OrdersDashboardRepo {
   Future<Either<Failure, List<OrderEntity>>> getPendingOrders();
+  
   Future<Either<Failure, List<OrderEntity>>> getArchivedOrders();
+
+  Future<Either<Failure, Unit>> nextStatus(OrderEntity  orderModel, int status);
+
+  Future<Either<Failure, Unit>> previousStatus(String docId, int status);
+
+  Future<Either<Failure, Unit>> deleteOrder(String docId);
 }

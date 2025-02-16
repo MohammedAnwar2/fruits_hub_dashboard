@@ -34,6 +34,15 @@ class ProductOrderModel {
     };
   }
 
+  factory ProductOrderModel.fromEntity(ProductOrderEntity productOrderEntity) {
+    return ProductOrderModel(
+      productName: productOrderEntity.productName,
+      productPrice: productOrderEntity.productPrice,
+      productCode: productOrderEntity.productCode,
+      imageUrl: productOrderEntity.imageUrl,
+      quantity: productOrderEntity.quantity,
+    );
+  }
   ProductOrderEntity toEntity() {
     return ProductOrderEntity(
       productName: productName,

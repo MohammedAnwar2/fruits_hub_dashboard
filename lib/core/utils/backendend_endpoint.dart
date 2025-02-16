@@ -7,4 +7,6 @@ class BackendendEndpoint {
   static const String orderDashboard = 'orders';
   static const String statusOrdersField = 'status';
   static const String orderDateOrderField = 'orderDate';
+  static const String uidOrdersField = 'uid';
+  static const String orderidOrdersField = 'orderid';
 }

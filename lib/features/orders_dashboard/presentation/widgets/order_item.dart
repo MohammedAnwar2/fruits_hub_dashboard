@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/features/orders_dashboard/domain/entities/order_entity.dart';
+import 'package:fruits_hub_dashboard/features/orders_dashboard/presentation/cubit/orders_dashboard_cubit/orders_dashboard_cubit.dart';
 
 class OrderItem extends StatelessWidget {
   final OrderEntity order;
@@ -9,6 +11,7 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return Column(
       children: [
         Card(
@@ -43,8 +46,10 @@ class OrderItem extends StatelessWidget {
                   Expanded(
                       child: CustomButton(
                           text: "Next Status",
-                          onPressed: () {
-                            // context.read<OrdersDashboardCubit>().nextStatus(docId, status)
+                          onPressed: ()async {
+                            // print("Next Status");
+                            await   context.read<OrdersDashboardCubit>().nextStatus(order, order.status + 1);
+
                           })),
                   const SizedBox(width: 3),
                   Expanded(

@@ -12,7 +12,7 @@ class OrderArchiveView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<OrdersDashboardCubit>()..getArchivedOrders(),
+      create: (context) => getIt<OrdersDashboardCubit>()..getArchivedOrders(), 
       child: Scaffold(
         appBar: CustomAppBar(title: 'Order Archive'),
         body: OrderArchiveViewBody(),

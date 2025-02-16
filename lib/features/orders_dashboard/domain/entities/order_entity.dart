@@ -4,6 +4,7 @@ import 'package:fruits_hub_dashboard/features/orders_dashboard/domain/entities/s
 
 class OrderEntity extends Equatable {
   final String uid;
+  final String orderid ;
   final num totalPrice;
   final bool payWithCash;
    int status;
@@ -19,6 +20,7 @@ class OrderEntity extends Equatable {
     required this.shippingAddressEntity,
     required this.status,
     required this.orderDate,
+    required this.orderid,
   });
 
   increamentStatus() {
@@ -32,6 +34,6 @@ class OrderEntity extends Equatable {
   }
   
   @override
-  List<Object?> get props => [uid];
+  List<Object?> get props => [orderid];
 
 }

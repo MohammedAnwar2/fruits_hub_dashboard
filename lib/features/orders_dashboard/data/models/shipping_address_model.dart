@@ -37,6 +37,16 @@ class ShippingAddressModel {
     };
   }
 
+  factory ShippingAddressModel.fromEntity(ShippingAddressEntity shippingAddressEntity) {
+    return ShippingAddressModel(
+      name: shippingAddressEntity.name,
+      email: shippingAddressEntity.email,
+      address: shippingAddressEntity.address,
+      city: shippingAddressEntity.city,
+      flatNumber: shippingAddressEntity.flatNumber,
+      phoneNumber: shippingAddressEntity.phoneNumber,
+    );
+  }
   ShippingAddressEntity toEntity() {
     return ShippingAddressEntity(
       name: name,

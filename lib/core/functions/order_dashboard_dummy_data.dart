@@ -4,6 +4,7 @@ import 'package:fruits_hub_dashboard/features/orders_dashboard/domain/entities/s
 
 OrderEntity getDummyOrder() {
   return OrderEntity(
+    orderid: "ORD123456",
     uid: "ORD123456",
     totalPrice: 150.75,
     payWithCash: true,
@@ -36,4 +37,8 @@ OrderEntity getDummyOrder() {
       phoneNumber: 1234567890,
     ),
   );
+}
+
+List<OrderEntity> getDummyOrders() {
+  return List.generate(10, (index) => getDummyOrder());
 }

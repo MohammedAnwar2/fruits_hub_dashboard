@@ -8,11 +8,8 @@ import 'package:fruits_hub_dashboard/core/service/store/data_base_services.dart'
 import 'package:fruits_hub_dashboard/core/service/store/firestore_services.dart';
 import 'package:fruits_hub_dashboard/features/add_products/presentation/cubit/add_products_cubit.dart';
 import 'package:fruits_hub_dashboard/features/orders_dashboard/data/datasources/order_dashboard_remote_datasource.dart';
-import 'package:fruits_hub_dashboard/features/orders_dashboard/data/datasources/order_mangement_status_remote_datasource.dart';
 import 'package:fruits_hub_dashboard/features/orders_dashboard/data/repositories/order_dashboard_repo_imp.dart';
-import 'package:fruits_hub_dashboard/features/orders_dashboard/data/repositories/order_mangement_status_repo_imp.dart';
 import 'package:fruits_hub_dashboard/features/orders_dashboard/presentation/cubit/orders_dashboard_cubit/orders_dashboard_cubit.dart';
-import 'package:fruits_hub_dashboard/features/orders_dashboard/presentation/cubit/orders_mangement_status_cubit/orders_mangement_status_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:uuid/uuid.dart';
 
@@ -52,12 +49,6 @@ _ordersDashboardFeature() {
       ordersDashboardRepo: getIt<OrderDashboardRepoImp>(),
     ),
   );
-  getIt.registerFactory<OrdersMangementStatusCubit>(
-    () => OrdersMangementStatusCubit(
-      ordersMangementStatusDashboardRepo: getIt<OrdersMangementStatusDashboardRepoImp>(),
-    ),
-  );
-
 
   //! repositories
   getIt.registerLazySingleton<OrderDashboardRepoImp>(
@@ -66,21 +57,10 @@ _ordersDashboardFeature() {
           getIt<OrderDashboardRemoteDatasourceImp>(),
     ),
   );
-  getIt.registerLazySingleton<OrdersMangementStatusDashboardRepoImp>(
-    () => OrdersMangementStatusDashboardRepoImp(
-      orderDashboardRemoteDatasource:
-          getIt<OrderMangementStatusdRemoteDatasourceImp>(),
-    ),
-  );
 
   //! datasources
   getIt.registerLazySingleton<OrderDashboardRemoteDatasourceImp>(
     () => OrderDashboardRemoteDatasourceImp(
-      dataBaseServices: getIt<DataBaseServices>(),
-    ),
-  );
-  getIt.registerLazySingleton<OrderMangementStatusdRemoteDatasourceImp>(
-    () => OrderMangementStatusdRemoteDatasourceImp(
       dataBaseServices: getIt<DataBaseServices>(),
     ),
   );

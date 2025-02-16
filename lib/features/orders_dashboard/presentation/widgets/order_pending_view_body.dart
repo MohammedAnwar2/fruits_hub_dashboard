@@ -9,11 +9,7 @@ class OrderPendingViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppConstants.horizontal),
-      child: CustomScrollView(
-        slivers: [
-          OrderItemListBlocBuilder(),
-        ],
-      ),
+      child: OrderItemListBlocBuilder(),
     );
   }
 }
