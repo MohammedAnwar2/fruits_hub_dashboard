@@ -4,7 +4,7 @@ part 'orders_mangement_status_state.dart';
 
 class OrdersMangementStatusCubit extends Cubit<OrdersMangementStatusState> {
   final OrdersMangementStatusDashboardRepo ordersMangementStatusDashboardRepo;
-  OrdersMangementStatusCubit(this.ordersMangementStatusDashboardRepo)
+  OrdersMangementStatusCubit({required this.ordersMangementStatusDashboardRepo})
       : super(OrdersMangementStatusInitial());
 
   Future<void> nextStatus(String docId, int status) async {
