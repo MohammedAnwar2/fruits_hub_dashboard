@@ -1,6 +1,6 @@
-import 'package:fruits_hub_dashboard/features/orders_dashboard/domain/entities/order_entity.dart';
-import 'package:fruits_hub_dashboard/features/orders_dashboard/domain/entities/product_order_entity.dart';
-import 'package:fruits_hub_dashboard/features/orders_dashboard/domain/entities/shipping_address_entity.dart';
+import 'package:fruits_hub_dashboard/features/orders/domain/entities/order_entity.dart';
+import 'package:fruits_hub_dashboard/features/orders/domain/entities/product_order_entity.dart';
+import 'package:fruits_hub_dashboard/features/orders/domain/entities/shipping_address_entity.dart';
 
 OrderEntity getDummyOrder() {
   return OrderEntity(

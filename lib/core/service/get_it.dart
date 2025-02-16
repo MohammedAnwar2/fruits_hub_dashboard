@@ -7,9 +7,9 @@ import 'package:fruits_hub_dashboard/core/service/storage/supabase_storage.dart'
 import 'package:fruits_hub_dashboard/core/service/store/data_base_services.dart';
 import 'package:fruits_hub_dashboard/core/service/store/firestore_services.dart';
 import 'package:fruits_hub_dashboard/features/add_products/presentation/cubit/add_products_cubit.dart';
-import 'package:fruits_hub_dashboard/features/orders_dashboard/data/datasources/order_dashboard_remote_datasource.dart';
-import 'package:fruits_hub_dashboard/features/orders_dashboard/data/repositories/order_dashboard_repo_imp.dart';
-import 'package:fruits_hub_dashboard/features/orders_dashboard/presentation/cubit/orders_dashboard_cubit/orders_dashboard_cubit.dart';
+import 'package:fruits_hub_dashboard/features/orders/data/datasources/order_dashboard_remote_datasource.dart';
+import 'package:fruits_hub_dashboard/features/orders/data/repositories/order_dashboard_repo_imp.dart';
+import 'package:fruits_hub_dashboard/features/orders/presentation/cubit/orders_dashboard_cubit/orders_dashboard_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:uuid/uuid.dart';
 
