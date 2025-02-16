@@ -4,6 +4,7 @@ import 'package:fruits_hub_dashboard/features/dashboard/presentation/pages/dashb
 import 'package:fruits_hub_dashboard/features/orders/presentation/pages/order_archive_view.dart';
 import 'package:fruits_hub_dashboard/features/orders/presentation/pages/order_dashboard_view.dart';
 import 'package:fruits_hub_dashboard/features/orders/presentation/pages/order_pending_view.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/pages/poroducts_management_view.dart';
 
 Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (settings) {
   switch (settings.name) {
@@ -17,6 +18,8 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (settings) {
       return MaterialPageRoute(builder: (_) => const OrderPendingView());
     case OrderArchiveView.routeName:
       return MaterialPageRoute(builder: (_) => const OrderArchiveView());
+    case PoroductsManagementView.routeName:
+      return MaterialPageRoute(builder: (_) => const PoroductsManagementView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

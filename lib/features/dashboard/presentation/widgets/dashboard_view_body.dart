@@ -3,6 +3,7 @@ import 'package:fruits_hub_dashboard/core/utils/app_constants.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/pages/add_products_view.dart';
 import 'package:fruits_hub_dashboard/features/orders/presentation/pages/order_dashboard_view.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/pages/poroducts_management_view.dart';
 
 class DashboardViewBody extends StatelessWidget {
   const DashboardViewBody({super.key});
@@ -16,9 +17,9 @@ class DashboardViewBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomButton(
-              text: "Add Data",
+              text: "Products Management",
               onPressed: () {
-                Navigator.pushNamed(context, AddProductsView.routeName);
+                Navigator.pushNamed(context, PoroductsManagementView.routeName);
               },
             ),
             SizedBox(height: 16),

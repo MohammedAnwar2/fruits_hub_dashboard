@@ -8,7 +8,7 @@ import 'package:fruits_hub_dashboard/core/utils/app_constants.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_form_field.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/domain/entities/product_entity.dart';
-import 'package:fruits_hub_dashboard/features/product_mangement/presentation/cubit/add_products_cubit.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/cubit/add_products_cubit/add_products_cubit.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/image_field.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/is_feature_check_box.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/is_organic_check_box.dart';
@@ -138,7 +138,7 @@ class _AddProductsViewBodyState extends State<AddProductsViewBody> {
                               int.parse(numberOfColoriesController.text),
                           isOrganic: isOrganic);
                       context
-                          .read<AddProductsCubit>()
+                          .read<ProductsManagementCubit>()
                           .addProduct(addProductEntities: inputEntity);
                     } else {
                       autovalidateMode = AutovalidateMode.always;

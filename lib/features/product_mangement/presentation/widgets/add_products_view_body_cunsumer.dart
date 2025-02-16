@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/functions/show_evect_event_message.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_colors.dart';
 import 'package:fruits_hub_dashboard/core/utils/custom_model_progress_indecator.dart';
-import 'package:fruits_hub_dashboard/features/product_mangement/presentation/cubit/add_products_cubit.dart';
+import 'package:fruits_hub_dashboard/features/product_mangement/presentation/cubit/add_products_cubit/add_products_cubit.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/add_products_view_body.dart';
 
 class AddProductsViewBodyConsumer extends StatelessWidget {
@@ -13,7 +13,7 @@ class AddProductsViewBodyConsumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddProductsCubit, AddProductsState>(
+    return BlocConsumer<ProductsManagementCubit, AddProductsState>(
       listener: (context, state) {
         if (state is AddProductsSuccess) {
           showEffectEventMessage(context, 'Product Added Successfully');
