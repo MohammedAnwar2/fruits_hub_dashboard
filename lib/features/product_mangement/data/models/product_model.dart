@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fruits_hub_dashboard/features/product_mangement/domain/entities/product_entity.dart';
 
 class ProductModel {
@@ -48,6 +50,23 @@ class ProductModel {
     };
   }
 
+  factory ProductModel.fromJson(Map<String, dynamic> map) {
+    return ProductModel(
+        productName: map['productName'],
+        productPrice: map['productPrice'],
+        productCode: map['productCode'],
+        productDescription: map['productDescription'],
+        isFeature: map['isFeature'],
+        imageUrl: map['imageUrl'],
+        expirationMonths: map['expirationMonths'],
+        isOrganic: map['isOrganic'],
+        avgRating: map['avgRating'],
+        ratingCount: map['ratingCount'],
+        unitAmount: map['unitAmount'],
+        numberOfCalories: map['numberOfCalories'],
+        sellingCount: map['sellingCount']);
+  }
+
   factory ProductModel.fromEntity(ProductEntities addProducts) {
     return ProductModel(
         productName: addProducts.productName,
@@ -63,5 +82,23 @@ class ProductModel {
         unitAmount: addProducts.unitAmount,
         numberOfCalories: addProducts.numberOfCalories,
         sellingCount: addProducts.sellingCount);
+  }
+  ProductEntities toEntity() {
+    return ProductEntities(
+      productName: productName,
+      productPrice: productPrice,
+      productCode: productCode,
+      productDescription: productDescription,
+      isFeature: isFeature,
+      imageUrl: imageUrl,
+      expirationMonths: expirationMonths,
+      isOrganic: isOrganic,
+      avgRating: avgRating,
+      ratingCount: ratingCount,
+      unitAmount: unitAmount,
+      numberOfCalories: numberOfCalories,
+      sellingCount: sellingCount,
+      imageFile: null,
+    );
   }
 }

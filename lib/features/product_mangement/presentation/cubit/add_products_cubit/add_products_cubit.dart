@@ -6,16 +6,19 @@ import 'package:fruits_hub_dashboard/features/product_mangement/domain/entities/
 import 'package:fruits_hub_dashboard/features/product_mangement/domain/usecase/add_products_usecase.dart';
 part 'add_products_state.dart';
 
-class ProductsManagementCubit extends Cubit<AddProductsState> {
-  ProductsManagementCubit({required this.imageRepo, required this.addProductsUsecase})
+class AddProductsCubit extends Cubit<AddProductsState> {
+  AddProductsCubit( {required this.imageRepo, 
+  required this.addProductsUsecase,
+  })
       : super(AddProductsInitial());
   final ImageRepo imageRepo;
   final AddProductsUsecase addProductsUsecase;
 
+
   Future<void> addProduct({required ProductEntities addProductEntities}) async {
     emit(AddProductsLoading());
     Either<Failure, String> result =
-        await imageRepo.uploadImage(file: addProductEntities.imageFile);
+        await imageRepo.uploadImage(file: addProductEntities.imageFile!);
     result.fold((failure) {
       emit(AddProductsFailure(errorMessage: failure.errorMessage));
     }, (imageUrl) async {

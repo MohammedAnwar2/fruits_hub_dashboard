@@ -4,14 +4,21 @@ import 'package:fruits_hub_dashboard/core/utils/app_text_style.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/custom_check_box.dart';
 
 class IsOrganicCheckBox extends StatefulWidget {
-  const IsOrganicCheckBox({super.key, required this.onChanged});
+  const IsOrganicCheckBox({super.key, required this.onChanged,  this.value=false});
   final Function(bool) onChanged;
+  final bool value ;
   @override
   State<IsOrganicCheckBox> createState() => _IsOrganicCheckBoxState();
 }
 
 class _IsOrganicCheckBoxState extends State<IsOrganicCheckBox> {
-  bool organicValue = false;
+
+  late bool organicValue;
+  @override
+  void initState() {
+    organicValue = widget.value;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -43,14 +50,3 @@ class _IsOrganicCheckBoxState extends State<IsOrganicCheckBox> {
     );
   }
 }
-
-
-        // Transform.translate(
-        //   offset: Offset(8, 0),
-        //   child: Checkbox(
-        //     value: true,
-        //     activeColor: AppColors.primary,
-        //     onChanged: (value) {},
-        //     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        //   ),
-        // ),

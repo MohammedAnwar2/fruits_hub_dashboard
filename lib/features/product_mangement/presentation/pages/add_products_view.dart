@@ -12,7 +12,7 @@ class AddProductsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<ProductsManagementCubit>(),
+      create: (context) => getIt<AddProductsCubit>(),
       child: Scaffold(
         appBar: CustomAppBar(title: 'Add Products'),
         body: AddProductsViewBodyConsumer(),

@@ -1,12 +1,14 @@
 import 'dart:io';
 
-class ProductEntities {
+import 'package:equatable/equatable.dart';
+
+class ProductEntities extends Equatable {
   final String productName;
   final num productPrice;
   final String productCode;
   final String productDescription;
   final bool isFeature;
-  final File imageFile;
+  final File ?imageFile;
   String? imageUrl;
   final int expirationMonths;
   final bool isOrganic;
@@ -32,4 +34,22 @@ class ProductEntities {
     required this.numberOfCalories,
     this.sellingCount = 0,
   });
+  
+  @override
+  List<Object?> get props =>[
+      productCode,
+      productName,
+      productPrice,
+      productDescription,
+      isFeature,
+      imageFile,
+      expirationMonths,
+      isOrganic,
+      avgRating,
+      ratingCount,
+      unitAmount,
+      numberOfCalories,
+      sellingCount,
+      imageUrl
+    ];  
 }

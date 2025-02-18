@@ -22,6 +22,14 @@ class AppImages {
   /// assets/images/check_box.svg
   static const String imagesCheckBox = "assets/images/check_box.svg";
 
+  /// Assets for imagesDecrease
+  /// assets/images/decrease.svg
+  static const String imagesDecrease = "assets/images/decrease.svg";
+
+  /// Assets for imagesEdit
+  /// assets/images/edit.svg
+  static const String imagesEdit = "assets/images/edit.svg";
+
   /// Assets for imagesFacebook
   /// assets/images/facebook.svg
   static const String imagesFacebook = "assets/images/facebook.svg";
@@ -29,6 +37,10 @@ class AppImages {
   /// Assets for imagesFilter
   /// assets/images/filter.svg
   static const String imagesFilter = "assets/images/filter.svg";
+
+  /// Assets for imagesFilter2
+  /// assets/images/filter2.svg
+  static const String imagesFilter2 = "assets/images/filter2.svg";
 
   /// Assets for imagesFrouts1
   /// assets/images/frouts1.svg
@@ -45,6 +57,14 @@ class AppImages {
   /// Assets for imagesHeart
   /// assets/images/heart.svg
   static const String imagesHeart = "assets/images/heart.svg";
+
+  /// Assets for imagesIncrease
+  /// assets/images/increase.svg
+  static const String imagesIncrease = "assets/images/increase.svg";
+
+  /// Assets for imagesLocation
+  /// assets/images/location.svg
+  static const String imagesLocation = "assets/images/location.svg";
 
   /// Assets for imagesLogo
   /// assets/images/logo.svg
@@ -113,6 +133,10 @@ class AppImages {
   /// Assets for imagesTest
   /// assets/images/test.svg
   static const String imagesTest = "assets/images/test.svg";
+
+  /// Assets for imagesTrash
+  /// assets/images/trash.svg
+  static const String imagesTrash = "assets/images/trash.svg";
 
   /// Assets for imagesUserIcon
   /// assets/images/user_icon.svg

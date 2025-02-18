@@ -4,14 +4,20 @@ import 'package:fruits_hub_dashboard/core/utils/app_text_style.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/custom_check_box.dart';
 
 class IsfeatureCheckBox extends StatefulWidget {
-  const IsfeatureCheckBox({super.key, required this.onChanged});
+  const IsfeatureCheckBox({super.key, required this.onChanged,  this.value=false});
   final Function(bool) onChanged;
+  final bool value ;
   @override
   State<IsfeatureCheckBox> createState() => _IsfeatureCheckBoxState();
 }
 
 class _IsfeatureCheckBoxState extends State<IsfeatureCheckBox> {
   bool termsValue = false;
+  @override
+  void initState() {
+    termsValue = widget.value;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Row(

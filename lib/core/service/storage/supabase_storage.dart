@@ -1,42 +1,67 @@
 import 'dart:io';
 import 'package:fruits_hub_dashboard/core/error/exceptions.dart';
-import 'package:fruits_hub_dashboard/core/utils/app_constants.dart';
+import 'package:fruits_hub_dashboard/core/service/get_it.dart';
+import 'package:fruits_hub_dashboard/core/utils/backendend_endpoint.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:fruits_hub_dashboard/core/service/storage/storage_services.dart';
 import 'package:path/path.dart' as b;
+import 'package:uuid/uuid.dart';
 
 class SupabaseStorage extends StorageServices {
   static final Supabase _supabase = Supabase.instance;
 
   static Future<void> init() async {
     await Supabase.initialize(
-      url: AppConstants.projectUrl,
-      anonKey: AppConstants.projectKey,
+      url: BackendendEndpoint.projectUrl,
+      anonKey: BackendendEndpoint.projectKey,
     );
 
-    final List<Bucket> buckets = await _supabase.client.storage.listBuckets();
-    bool bucketExists = buckets.any((bucket) => bucket.name == 'fruits');
-    if (!bucketExists) {
-      await _supabase.client.storage.createBucket('fruits');
-    }
+    //====>> The recommended approach is to create the bucket directly from the Supabase dashboard <<====
+    //====>> The following is how to create a bucket programmatically from Flutter <<====
+
+    // final List<Bucket> buckets = await _supabase.client.storage.listBuckets();
+    // bool bucketExists = buckets.any((bucket) => bucket.name == BackendendEndpoint.bucketName);
+    // if (!bucketExists) {
+    //   await _supabase.client.storage.createBucket(BackendendEndpoint.bucketName);
+    // }
   }
 
   @override
   Future<String> uploadImage(
       {required File file, required String storagePath}) async {
     try {
-      String fileName = b.basename(file.path);
+      // String fileName = b.basename(file.path);
+      String fileName = getIt<Uuid>().v4();
       String extension = b.extension(file.path);
       String path = "$storagePath/$fileName$extension";
-      await _supabase.client.storage.from('fruits').upload(path, file);
+      await _supabase.client.storage
+          .from(BackendendEndpoint.bucketName)
+          .upload(path, file);
 
-      String imageUrl =
-          _supabase.client.storage.from('fruits').getPublicUrl(path);
+      String imageUrl = _supabase.client.storage
+          .from(BackendendEndpoint.bucketName)
+          .getPublicUrl(path);
       return imageUrl;
     } catch (e) {
       throw ServerException('Failed to upload image');
     }
   }
-}
 
-//the best thing is creating the bucker for the dashbard of supabase
+  @override
+  Future<void> deleteImage({required String imageUrl}) async {
+    try {
+      String path = extractImagePath(imageUrl);
+      await _supabase.client.storage
+          .from(BackendendEndpoint.bucketName)
+          .remove([path]);
+    } catch (e) {
+      throw ServerException('Failed to delete image');
+    }
+  }
+
+  String extractImagePath(String imageUrl) {
+    const String baseUrl =
+        '${BackendendEndpoint.projectUrl}/storage/v1/object/public/${BackendendEndpoint.bucketName}/';
+    return imageUrl.replaceFirst(baseUrl, '');
+  }
+}

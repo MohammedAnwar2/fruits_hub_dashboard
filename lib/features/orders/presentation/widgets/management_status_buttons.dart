@@ -22,7 +22,6 @@ class ManagementStatusButtons extends StatelessWidget {
                 child: CustomButton(
                     text: "Next Status",
                     onPressed: ()async {
-                      // print("Next Status");
                       await   context.read<OrdersDashboardCubit>().nextStatus(order, order.status + 1);
     
                     })),

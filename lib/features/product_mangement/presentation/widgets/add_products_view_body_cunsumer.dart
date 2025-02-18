@@ -13,15 +13,16 @@ class AddProductsViewBodyConsumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProductsManagementCubit, AddProductsState>(
+    return BlocConsumer<AddProductsCubit, AddProductsState>(
       listener: (context, state) {
         if (state is AddProductsSuccess) {
           showEffectEventMessage(context, 'Product Added Successfully');
-          Navigator.pop(context);
+          Navigator.pop(context, true);
         }
         if (state is AddProductsFailure) {
           showEffectEventMessage(
               context, state.errorMessage, AppColors.red, AppColors.white);
+          Navigator.pop(context, false);
         }
       },
       builder: (context, state) {

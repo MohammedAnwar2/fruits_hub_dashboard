@@ -7,22 +7,51 @@ import 'package:fruits_hub_dashboard/features/product_mangement/domain/entities/
 
 class ProductsRepoImp implements ProductsRepo {
   final ProductsManagementDatasource productsManagementDatasource;
-  // final DataBaseServices dataBaseServices;
   ProductsRepoImp({required this.productsManagementDatasource});
   @override
   Future<Either<Failure, Unit>> addProduct(
       ProductEntities productEntities) async {
     ProductModel productModel = ProductModel.fromEntity(productEntities);
     try {
-      productsManagementDatasource.addProduct(productModel);
+      await productsManagementDatasource.addProduct(productModel);
       return Either.right(Unit.instance);
     } catch (e) {
-      return Either.left(ServerFailure('failed to add product'));
+      return Either.left(ServerFailure('failed to add product '));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteProduct(String productId) async {
+    try {
+      await productsManagementDatasource.deleteProduct(productId);
+      return Either.right(Unit.instance);
+    } catch (e) {
+      return Either.left(ServerFailure('failed to delete product '));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProductEntities>>> getProducts() async {
+    try {
+      List<ProductModel> products =
+          await productsManagementDatasource.getProducts();
+      List<ProductEntities> productEntities =
+          products.map((e) => e.toEntity()).toList();
+      return Either.right(productEntities);
+    } catch (e) {
+      return Either.left(ServerFailure('failed to get products '));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateProduct(
+      ProductEntities productEntities) async {
+    ProductModel productModel = ProductModel.fromEntity(productEntities);
+    try {
+      await productsManagementDatasource.updateProduct(productModel);
+      return Either.right(Unit.instance);
+    } catch (e) {
+      return Either.left(ServerFailure('failed to update product '));
     }
   }
 }
-/*
-productsManagementDatasource.addData(
-          path: BackendendEndpoint.addProducts,
-          data: ProductModel.fromEntity(productEntities).toMap())
- */

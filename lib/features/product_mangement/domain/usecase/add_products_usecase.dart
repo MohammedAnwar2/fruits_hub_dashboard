@@ -9,6 +9,6 @@ class AddProductsUsecase extends Usecase<Unit,ProductEntities > {
   AddProductsUsecase({required this.productsRepo});
   @override
   Future<Either<Failure, Unit>> call(ProductEntities  param) async {
-    return productsRepo.addProduct(param);
+    return await productsRepo.addProduct(param);
   }
 }
