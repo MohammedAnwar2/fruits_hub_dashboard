@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub_dashboard/features/advertisement/domain/entities/advertisement_entity.dart';
 import 'package:fruits_hub_dashboard/features/advertisement/presentation/pages/add_advertisement_view.dart';
 import 'package:fruits_hub_dashboard/features/advertisement/presentation/pages/get_advertisement_view.dart';
 import 'package:fruits_hub_dashboard/features/advertisement/presentation/pages/update_advertisement_view.dart';
@@ -34,7 +35,9 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (settings) {
     case AddAdvertisementView.routeName:
       return MaterialPageRoute(builder: (_) => const AddAdvertisementView());
     case UpdateAdvertisementView.routeName:
-      return MaterialPageRoute(builder: (_) => const UpdateAdvertisementView());
+      return MaterialPageRoute(builder: (_) =>  UpdateAdvertisementView(
+        advertisement: settings.arguments as AdvertisementEntity,
+      ));
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

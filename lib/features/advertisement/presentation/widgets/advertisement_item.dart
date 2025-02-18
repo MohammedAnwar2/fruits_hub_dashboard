@@ -19,24 +19,19 @@ class AdvertisementItem extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            if (advertisement.imageUrl != null)...{
-            CustomLoadedAdvertisementImage(isArabic: isArabic, advertisement: advertisement),
-            } else...{
-            CustomLoadingAdvertisementImage(isArabic: isArabic),
+            if (advertisement.imageUrl != null) ...{
+              CustomLoadedAdvertisementImage(
+                  isArabic: isArabic, advertisement: advertisement),
+            } else ...{
+              CustomLoadingAdvertisementImage(isArabic: isArabic),
             },
-            CustomBanner( isArabic: isArabic,advertisement: advertisement),
+            CustomBanner(isArabic: isArabic, advertisement: advertisement),
           ],
         ),
       ),
     );
   }
+
   bool getLanguage() => false;
   // bool getLanguage() =>  SharedPref.getString(AppKey.localizationsDelegates) !='ar' ? false:true;
 }
-
-
-
-
-
-
-

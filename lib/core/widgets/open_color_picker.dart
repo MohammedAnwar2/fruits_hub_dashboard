@@ -3,19 +3,27 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fruits_hub_dashboard/core/functions/conver_colors.dart';
 
 class CustomColorPicker extends StatefulWidget {
-  const CustomColorPicker({super.key, required this.onColorChanged});
+  const CustomColorPicker({super.key, required this.onColorChanged, this.currentColor});
   final Function(Color color) onColorChanged;
+  final Color? currentColor;
   @override
   State<CustomColorPicker> createState() => _CustomColorPickerState();
 }
 
 class _CustomColorPickerState extends State<CustomColorPicker> {
-  Color pickerColor = Color(0xff443a49);
-  Color currentColor = Color(0xff443a49);
+  
+  late Color pickerColor ;
+  late Color currentColor;
   void changeColor(Color color) {
     setState(() {
       pickerColor = color;
     });
+  }
+  @override
+  void initState() {
+    super.initState();
+    currentColor = widget.currentColor ?? Color(0xff443a49);
+    pickerColor = currentColor;
   }
 
   Future<String?> openColorPicker(BuildContext context) async {

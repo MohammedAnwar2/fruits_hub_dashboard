@@ -130,6 +130,7 @@ _advertisementManagementFeature() {
 
   getIt.registerFactory<ViewAndDeleteAdvertisementCubit>(
     () => ViewAndDeleteAdvertisementCubit(
+      imageRepo: getIt<ImageRepo>(),
       deleteAdvertisementUsecase: getIt<DeleteAdvertisementUsecase>(),
       viewAdvertisementUsecase: getIt<GetAdvertisementUsecase>(),
     ),

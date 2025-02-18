@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/functions/show_evect_event_message.dart';
@@ -25,7 +23,7 @@ class ProductItem extends StatelessWidget {
       final result =  await  Navigator.pushNamed(context, UpdateProductsView.routeName, arguments: product);
        if(result == true){
             context.read<ViewAndDeleteCubit>().viewProducts();
-          }else{
+          }else if(result == false){
             showEffectEventMessage(context, 'No changes were made to the product');
           }
       },
