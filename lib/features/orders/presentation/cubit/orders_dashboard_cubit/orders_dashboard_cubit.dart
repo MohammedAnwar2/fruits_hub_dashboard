@@ -37,6 +37,7 @@ class OrdersDashboardCubit extends Cubit<OrdersDashboardState> {
         (unit) async{
           orderModel.increamentStatus();
           ordersList.replaceInList(orderModel);
+          
           emit(OrdersDashboardSuccess(orders: ordersList.orders));
         } 
       );

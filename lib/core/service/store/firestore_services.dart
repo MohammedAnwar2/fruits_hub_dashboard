@@ -56,60 +56,59 @@ class FirestoreServices extends DataBaseServices {
     return doc.exists;
   }
 
-
-Future<void> update({
-  required String path,
-  required Map<String, dynamic> data,
-  String? docId,
-  Map<String, dynamic>? query,
-}) async {
-  if (docId == null) {
-    if (query != null) {
-    Query<Map<String, dynamic>> allData = firestore.collection(path);
-      allData = filter(query, allData);
-      // print(allData.toString());
-      var value = await allData.get(); // استخدام await لضمان تنفيذ الاستعلام أولا
-      print(value.docs.toString());
-
-      if (value.docs.isEmpty) {
-        print("not found =============================");
-        return; // إنهاء الدالة إذا لم يتم العثور على مستندات
+  @override
+  Future<void> update({
+    required String path,
+    required Map<String, dynamic> data,
+    String? docId,
+    Map<String, dynamic>? query,
+  }) async {
+    if (docId == null) {
+      if (query != null) {
+        Query<Map<String, dynamic>> allData = firestore.collection(path);
+        allData = filter(query, allData);
+        var value = await allData.get();
+        if (value.docs.isEmpty) {
+          return;
+        }
+        await Future.wait(value.docs.map((element) async {
+          await firestore.collection(path).doc(element.id).update(data);
+        }));
+      } else {
+        throw ServerException('Document Id is required for update');
       }
-
-      // تحديث جميع المستندات المطابقة
-      await Future.wait(value.docs.map((element) async {
-        print("${element.id} =============================");
-        await firestore.collection(path).doc(element.id).update(data);
-      }));
-
     } else {
-      throw ServerException('Document Id is required for update');
+      await firestore.collection(path).doc(docId).update(data);
     }
-  } else {
-    await firestore.collection(path).doc(docId).update(data);
   }
-}
-
 
   @override
-  Future<void> delete({required String path,  String? docId, Map<String, dynamic>? query})async {
+  Future<void> delete(
+      {required String path,
+      String? docId,
+      Map<String, dynamic>? query}) async {
     if (query != null) {
       Query<Map<String, dynamic>> allData = firestore.collection(path);
       allData = filter(query, allData);
-       await allData.get().then((value) {
+      await allData.get().then((value) {
         if (value.docs.isEmpty) {
           throw ServerException('Document not found');
         }
-        return Future.wait(value.docs.map((element) async {
-          await firestore.collection(path).doc(element.id).delete();
-        },),);
+        return Future.wait(
+          value.docs.map(
+            (element) async {
+              await firestore.collection(path).doc(element.id).delete();
+            },
+          ),
+        );
       });
     } else {
       return firestore.collection(path).doc(docId).delete();
     }
   }
 
-  Query<Map<String, dynamic>> filter(Map<String, dynamic> query, Query<Map<String, dynamic>> data) {
+  Query<Map<String, dynamic>> filter(
+      Map<String, dynamic> query, Query<Map<String, dynamic>> data) {
     if (query[QueryConstants.orderBy.name] != null) {
       String orderBy = query[QueryConstants.orderBy.name];
       bool descending = query[QueryConstants.descending.name] ?? false;
@@ -122,50 +121,43 @@ Future<void> update({
     // Apply where filters
     if (query.containsKey(QueryConstants.where.name)) {
       List<Map<String, dynamic>> whereFilters =
-          List<Map<String, dynamic>>.from(
-              query[QueryConstants.where.name]);
-    
+          List<Map<String, dynamic>>.from(query[QueryConstants.where.name]);
+
       for (var filter in whereFilters) {
         String field = filter[QueryWhereConstants.field.name];
-    
+
         if (filter.containsKey(QueryWhereConstants.isEqualTo.name)) {
           data = data.where(field,
               isEqualTo: filter[QueryWhereConstants.isEqualTo.name]);
         }
         if (filter.containsKey(QueryWhereConstants.isNotEqualTo.name)) {
           data = data.where(field,
-              isNotEqualTo:
-                  filter[QueryWhereConstants.isNotEqualTo.name]);
-                  
+              isNotEqualTo: filter[QueryWhereConstants.isNotEqualTo.name]);
         }
         if (filter.containsKey(QueryWhereConstants.isGreaterThan.name)) {
           data = data.where(field,
-              isGreaterThan:
-                  filter[QueryWhereConstants.isGreaterThan.name]);
+              isGreaterThan: filter[QueryWhereConstants.isGreaterThan.name]);
         }
         if (filter.containsKey(QueryWhereConstants.isLessThan.name)) {
           data = data.where(field,
               isLessThan: filter[QueryWhereConstants.isLessThan.name]);
         }
-        if (filter.containsKey(
-            QueryWhereConstants.isGreaterThanOrEqualTo.name)) {
-          data = data.where(field,
-              isGreaterThanOrEqualTo: filter[
-                  QueryWhereConstants.isGreaterThanOrEqualTo.name]);
-        }
         if (filter
-            .containsKey(QueryWhereConstants.isLessThanOrEqualTo.name)) {
+            .containsKey(QueryWhereConstants.isGreaterThanOrEqualTo.name)) {
+          data = data.where(field,
+              isGreaterThanOrEqualTo:
+                  filter[QueryWhereConstants.isGreaterThanOrEqualTo.name]);
+        }
+        if (filter.containsKey(QueryWhereConstants.isLessThanOrEqualTo.name)) {
           data = data.where(field,
               isLessThanOrEqualTo:
                   filter[QueryWhereConstants.isLessThanOrEqualTo.name]);
         }
         if (filter.containsKey(QueryWhereConstants.arrayContains.name)) {
           data = data.where(field,
-              arrayContains:
-                  filter[QueryWhereConstants.arrayContains.name]);
+              arrayContains: filter[QueryWhereConstants.arrayContains.name]);
         }
-        if (filter
-            .containsKey(QueryWhereConstants.arrayContainsAny.name)) {
+        if (filter.containsKey(QueryWhereConstants.arrayContainsAny.name)) {
           data = data.where(field,
               arrayContainsAny:
                   filter[QueryWhereConstants.arrayContainsAny.name]);
@@ -182,5 +174,4 @@ Future<void> update({
     }
     return data;
   }
-
 }

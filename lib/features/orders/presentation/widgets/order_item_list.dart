@@ -8,7 +8,6 @@ class OrderItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      // Prevents nested scrolling issues
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) => OrderItem(order: orders[index]),
       itemCount: orders.length,

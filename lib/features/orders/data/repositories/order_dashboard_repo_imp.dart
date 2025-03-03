@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fruits_hub_dashboard/core/error/failures.dart';
 import 'package:fruits_hub_dashboard/core/utils/either_class.dart';
 import 'package:fruits_hub_dashboard/features/orders/data/datasources/order_dashboard_remote_datasource.dart';
@@ -20,8 +17,6 @@ class OrderDashboardRepoImp extends OrdersDashboardRepo {
       List<OrderEntity> orders = data.map((e) => e.toEntity()).toList();
       return Either.right(orders);
     } catch (e) {
-      // log(e.toString());
-      // return Either.left(ServerFailure(e.toString()));
       return Either.left(ServerFailure('Failed to get orders!'));
     }
   }
@@ -33,8 +28,6 @@ class OrderDashboardRepoImp extends OrdersDashboardRepo {
       List<OrderEntity> orders = data.map((e) => e.toEntity()).toList();
       return Either.right(orders);
     } catch (e) {
-      log(e.toString());
-      // return Either.left(ServerFailure(e.toString()));
       return Either.left(ServerFailure('Failed to get orders!'));
     }
   }

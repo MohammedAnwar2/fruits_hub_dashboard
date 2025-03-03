@@ -8,9 +8,9 @@ abstract class OrderDashboardRemoteDatasource {
 
   Future<List<OrderModel>> getArchivedOrders();
 
-  Future<void> nextStatus(OrderModel  orderModel, int status);
+  Future<void> nextStatus(OrderModel orderModel, int status);
 
-  Future<void> previousStatus(OrderModel  orderModel, int status);
+  Future<void> previousStatus(OrderModel orderModel, int status);
 
   Future<void> deleteOrder(String docId);
 }
@@ -26,7 +26,7 @@ class OrderDashboardRemoteDatasourceImp
       where: [
         WhereFilter(
           field: BackendendEndpoint.statusOrdersField,
-          isLessThanOrEqualTo: 3,
+          isLessThanOrEqualTo: 4,
         ),
       ],
       orderBy: BackendendEndpoint.orderDateOrderField,
@@ -45,7 +45,7 @@ class OrderDashboardRemoteDatasourceImp
       where: [
         WhereFilter(
           field: BackendendEndpoint.statusOrdersField,
-          isEqualTo: 4,
+          isEqualTo: 5,
         ),
       ],
       orderBy: BackendendEndpoint.orderDateOrderField,
@@ -58,7 +58,7 @@ class OrderDashboardRemoteDatasourceImp
     return orders;
   }
 
-   @override
+  @override
   Future<void> deleteOrder(String orderId) async {
     QueryModel queryModel = QueryModel(
       where: [
@@ -75,39 +75,43 @@ class OrderDashboardRemoteDatasourceImp
   }
 
   @override
-  Future<void> nextStatus(OrderModel  orderModel, int status) async {
-      QueryModel queryModel = QueryModel(
+  Future<void> nextStatus(OrderModel orderModel, int status) async {
+    QueryModel queryModel = QueryModel(
       where: [
         WhereFilter(
           field: BackendendEndpoint.orderidOrdersField,
           isEqualTo: orderModel.orderid,
         ),
       ],
-      );
+    );
+    orderModel.timeline.add(DateTime.now().toString());
     await dataBaseServices.update(
       path: BackendendEndpoint.orderDashboardNextStatus,
       query: queryModel.toMap(),
       data: {
         BackendendEndpoint.statusOrdersField: status,
+        BackendendEndpoint.timelinesOrdersField: orderModel.timeline,
       },
     );
   }
 
   @override
-  Future<void> previousStatus(OrderModel  orderModel, int status) async {
-       QueryModel queryModel = QueryModel(
+  Future<void> previousStatus(OrderModel orderModel, int status) async {
+    QueryModel queryModel = QueryModel(
       where: [
         WhereFilter(
           field: BackendendEndpoint.orderidOrdersField,
           isEqualTo: orderModel.orderid,
         ),
       ],
-      );
+    );
+    orderModel.timeline.removeLast();
     await dataBaseServices.update(
       path: BackendendEndpoint.orderDashboardPreviousStatus,
       query: queryModel.toMap(),
       data: {
         BackendendEndpoint.statusOrdersField: status,
+        BackendendEndpoint.timelinesOrdersField: orderModel.timeline,
       },
     );
   }

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:fruits_hub_dashboard/core/error/exceptions.dart';
-import 'package:fruits_hub_dashboard/core/service/get_it.dart';
+import 'package:fruits_hub_dashboard/config/get_it_index.dart';
 import 'package:fruits_hub_dashboard/core/utils/backendend_endpoint.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:fruits_hub_dashboard/core/service/storage/storage_services.dart';
@@ -35,11 +35,11 @@ class SupabaseStorage extends StorageServices {
       String extension = b.extension(file.path);
       String path = "$storagePath/$fileName$extension";
       await _supabase.client.storage
-          .from(BackendendEndpoint.bucketName)
+          .from(BackendendEndpoint.fruitsBucketName)
           .upload(path, file);
 
       String imageUrl = _supabase.client.storage
-          .from(BackendendEndpoint.bucketName)
+          .from(BackendendEndpoint.fruitsBucketName)
           .getPublicUrl(path);
       return imageUrl;
     } catch (e) {
@@ -52,7 +52,7 @@ class SupabaseStorage extends StorageServices {
     try {
       String path = extractImagePath(imageUrl);
       await _supabase.client.storage
-          .from(BackendendEndpoint.bucketName)
+          .from(BackendendEndpoint.fruitsBucketName)
           .remove([path]);
     } catch (e) {
       throw ServerException('Failed to delete image');
@@ -61,7 +61,7 @@ class SupabaseStorage extends StorageServices {
 
   String extractImagePath(String imageUrl) {
     const String baseUrl =
-        '${BackendendEndpoint.projectUrl}/storage/v1/object/public/${BackendendEndpoint.bucketName}/';
+        '${BackendendEndpoint.projectUrl}/storage/v1/object/public/${BackendendEndpoint.fruitsBucketName}/';
     return imageUrl.replaceFirst(baseUrl, '');
   }
 }

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/functions/validate_input.dart';
-import 'package:fruits_hub_dashboard/core/service/get_it.dart';
+import 'package:fruits_hub_dashboard/config/get_it_index.dart';
 import 'package:fruits_hub_dashboard/core/utils/app_constants.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_form_field.dart';

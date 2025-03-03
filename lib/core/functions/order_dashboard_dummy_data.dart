@@ -9,6 +9,7 @@ OrderEntity getDummyOrder() {
     totalPrice: 150.75,
     payWithCash: true,
     status: 4,
+    timeline: [DateTime.now().toIso8601String()],
     orderDate: DateTime.now(),
     productOrderEntity: [
       ProductOrderEntity(

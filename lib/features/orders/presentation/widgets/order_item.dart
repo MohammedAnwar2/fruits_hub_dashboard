@@ -37,7 +37,7 @@ class OrderItem extends StatelessWidget {
             ),
           ),
         ),
-        if (order.status <= 3)
+        if (order.status <= 4)
           ManagementStatusButtons(order: order),
       ],
     );

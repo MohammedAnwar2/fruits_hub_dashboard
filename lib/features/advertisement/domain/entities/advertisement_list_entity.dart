@@ -7,17 +7,8 @@ class AdvertisementListEntity {
   addAllToList(List<AdvertisementEntity> advertisements) {
     this.advertisements.addAll(advertisements);
   }
-
-  addToList(AdvertisementEntity advertisement) {
-    advertisements.add(advertisement);
-  }
-
   clearList() {
     advertisements.clear();
-  }
-
-  List<AdvertisementEntity> getAdvertisements() {
-    return advertisements;
   }
 
   deleteFromList(AdvertisementEntity advertisement) {

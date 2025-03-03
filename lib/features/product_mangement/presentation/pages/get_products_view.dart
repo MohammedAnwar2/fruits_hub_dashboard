@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruits_hub_dashboard/core/service/get_it.dart';
+import 'package:fruits_hub_dashboard/config/get_it_index.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/cubit/view_and_delete_cubit/view_and_delete_cubit.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_floating_action_button.dart';
 import 'package:fruits_hub_dashboard/features/product_mangement/presentation/widgets/get_products_view.dart';

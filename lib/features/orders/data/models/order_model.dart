@@ -14,20 +14,20 @@ class OrderModel {
   final List<ProductOrderModel> productOrderModel;
   final ShippingAddressModel shippingAddressModel;
   final DateTime orderDate;
+  final List<String> timeline;
 
-  OrderModel( {
-    required this.uid,
-    required this.orderid,
-    required this.totalPrice,
-    required this.payWithCash,
-    required this.productOrderModel,
-    required this.shippingAddressModel,
-    required this.status,
-    required this.orderDate,
-  });
+  OrderModel(
+      {required this.uid,
+      required this.orderid,
+      required this.totalPrice,
+      required this.payWithCash,
+      required this.productOrderModel,
+      required this.shippingAddressModel,
+      required this.status,
+      required this.orderDate,
+      required this.timeline});
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
-    // log(json['status']+"=====================");
     return OrderModel(
       uid: json['uid'],
       totalPrice: json['totalPrice'],
@@ -41,35 +41,40 @@ class OrderModel {
       status: json['status'],
       orderDate: DateTime.parse(json['orderDate']),
       orderid: json['orderid'],
+      timeline: json['timelines'].cast<String>(),
     );
   }
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     'uid': uid,
-  //     'totalPrice': totalPrice,
-  //     'payWithCash': payWithCash,
-  //     'orderDate': orderDate.toIso8601String(),
-  //     'status': status,
-  //     'productOrderModel': productOrderModel
-  //         .map((productOrderModel) => productOrderModel.toJson())
-  //         .toList(),
-  //     'shippingAddressModel': shippingAddressModel.toJson(),
-  //     'orderid': orderid,
-  //   };
-  // }
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'orderid': orderid,
+      'totalPrice': totalPrice,
+      'payWithCash': payWithCash,
+      'orderDate': orderDate.toIso8601String(),
+      'status': status,
+      'productOrderModel': productOrderModel
+          .map((productOrderModel) => productOrderModel.toJson())
+          .toList(),
+      'shippingAddressModel': shippingAddressModel.toJson(),
+      'timelines': timeline
+    };
+  }
+
   factory OrderModel.fromEntity(OrderEntity orderEntity) {
     return OrderModel(
       uid: orderEntity.uid,
       totalPrice: orderEntity.totalPrice,
       payWithCash: orderEntity.payWithCash,
       productOrderModel: orderEntity.productOrderEntity
-          .map<ProductOrderModel>(
-              (productOrderEntity) => ProductOrderModel.fromEntity(productOrderEntity))
+          .map<ProductOrderModel>((productOrderEntity) =>
+              ProductOrderModel.fromEntity(productOrderEntity))
           .toList(),
-      shippingAddressModel: ShippingAddressModel.fromEntity(orderEntity.shippingAddressEntity),
+      shippingAddressModel:
+          ShippingAddressModel.fromEntity(orderEntity.shippingAddressEntity),
       status: orderEntity.status,
       orderDate: orderEntity.orderDate,
       orderid: orderEntity.orderid,
+      timeline: orderEntity.timeline,
     );
   }
 
@@ -86,8 +91,7 @@ class OrderModel {
       shippingAddressEntity: shippingAddressModel.toEntity(),
       status: status,
       orderDate: orderDate,
+      timeline: timeline,
     );
   }
-
-
 }

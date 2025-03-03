@@ -11,6 +11,7 @@ class OrderEntity extends Equatable {
   final List<ProductOrderEntity> productOrderEntity;
   final ShippingAddressEntity shippingAddressEntity;
   final DateTime orderDate;
+  final List<String>timeline;
 
   OrderEntity({
     required this.uid,
@@ -21,6 +22,7 @@ class OrderEntity extends Equatable {
     required this.status,
     required this.orderDate,
     required this.orderid,
+    required this.timeline
   });
 
   increamentStatus() {

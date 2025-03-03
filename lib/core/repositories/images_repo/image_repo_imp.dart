@@ -14,7 +14,9 @@ class ImageRepoImp implements ImageRepo {
   Future<Either<Failure, String>> uploadImage({required File file}) async {
     try {
       String imageUrl = await storageServices.uploadImage(
-          file: file, storagePath: BackendendEndpoint.bucketName);
+        file: file,
+        storagePath: BackendendEndpoint.fruitsBucketName,
+      );
       return Either.right(imageUrl);
     } on ServerException catch (e) {
       return Either.left(ServerFailure(e.errorMessage));
@@ -22,9 +24,9 @@ class ImageRepoImp implements ImageRepo {
       return Either.left(ServerFailure(e.toString()));
     }
   }
-  
+
   @override
-  Future<Either<Failure, Unit>> deleteImage({required String imageUrl})async {
+  Future<Either<Failure, Unit>> deleteImage({required String imageUrl}) async {
     try {
       await storageServices.deleteImage(imageUrl: imageUrl);
       return Either.right(Unit.instance);
@@ -32,5 +34,4 @@ class ImageRepoImp implements ImageRepo {
       return Either.left(ServerFailure(e.errorMessage));
     }
   }
-  
 }

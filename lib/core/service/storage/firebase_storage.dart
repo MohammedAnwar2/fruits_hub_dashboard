@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fruits_hub_dashboard/core/error/exceptions.dart';
-import 'package:fruits_hub_dashboard/core/service/get_it.dart';
+import 'package:fruits_hub_dashboard/config/get_it_index.dart';
 import 'package:fruits_hub_dashboard/core/service/storage/storage_services.dart';
 import 'package:path/path.dart' as b;
 import 'package:uuid/uuid.dart';

@@ -7,7 +7,7 @@ class OrderListItemsEntities  {
     orders.addAll(order);
   }
   replaceInList(OrderEntity orderEntity) {
-    if(orderEntity.status==4 ){
+    if(orderEntity.status==5 ){
       removeOrder(orderEntity.orderid);
       // orders.removeWhere((element) => element.orderid == orderEntity.orderid);
     }else {

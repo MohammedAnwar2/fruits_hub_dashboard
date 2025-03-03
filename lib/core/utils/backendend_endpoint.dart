@@ -1,5 +1,5 @@
 class BackendendEndpoint {
-  static const String bucketName = 'fruits';
+  static const String fruitsBucketName = 'fruits';
   static const String projectUrl = 'https://khthzikbxmqwylgvblne.supabase.co';
   static const String projectKey =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtodGh6aWtieG1xd3lsZ3ZibG5lIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczODY1ODY3MSwiZXhwIjoyMDU0MjM0NjcxfQ.mMmf3Htx-ltMCNo9YCiwEjsfaYRU0W84nZ20Tpsakk8';
@@ -15,6 +15,7 @@ class BackendendEndpoint {
   static const String orderDashboardNextStatus = 'orders';
   static const String orderDashboardPreviousStatus = 'orders';
   static const String statusOrdersField = 'status';
+  static const String timelinesOrdersField = 'timelines';
   static const String orderDateOrderField = 'orderDate';
   static const String uidOrdersField = 'uid';
   static const String orderidOrdersField = 'orderid';
